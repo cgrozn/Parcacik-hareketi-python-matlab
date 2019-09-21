@@ -1,0 +1,64 @@
+oku=dlmread("C:\\MATLAB\besinci_128_metin_0001.txt");
+%text dosya veri yolu
+ 
+[O1 ,O2]=size(oku);
+ 
+%satır sayısı kadar açı bölgesi hesaplar
+ for i=1:1:O1
+
+     %+u -v 3 bölge
+     if(oku(i,4)<0&&oku(i,3)>0)
+     aci(i,1)=oku(i,4)/oku(i,3);
+ 
+    derece(i,1)=atand(aci(i,1));
+     derece(i,1)=180+derece(i,1);
+    
+     end
+     
+     
+     %4 bölge v-- u--
+     if(oku(i,4)<0&&oku(i,3)<0)
+     aci(i,1)=oku(i,4)/oku(i,3);
+ 
+     derece(i,1)=atand(aci(i,1));
+       derece(i,1)=360-derece(i,1);
+  
+     end
+ 
+        %2 bölge 
+        % u-- v++
+    if(oku(i,4)>0&&oku(i,3)<0)
+     aci(i,1)=oku(i,4)/oku(i,3);
+ 
+    derece(i,1)=atand(aci(i,1));
+       derece(i,1)=180-derece(i,1);
+ 
+ 
+    end
+    
+    %v++ u++ 
+    %1 bölge 
+ 
+     if(oku(i,4)>0&&oku(i,3)>0)
+     aci(i,1)=oku(i,4)/oku(i,3);
+    derece(i,1)=atand(aci(i,1));
+   
+     end
+  
+ end
+load('C:\Users\...\Documents\MATLAB\image1_cut.mat');
+load('C:\Users\...\Documents\MATLAB\image2_cut.mat');
+
+   %kaç satır varsa o kadar oku değeri artar ve parça koparır
+  for a=1:oku
+      
+  figure;
+  parca1=imshow(image1_cut(:,:,a),[min(min(image1_cut(:,:,a))) max(max(image1_cut(:,:,a)))]);
+ parca2=imshow(image2_cut(:,:,a),[min(min(image2_cut(:,:,a))) max(max(image2_cut(:,:,a)))]);
+ 
+ x=derece(a);
+ save(sprintf('derece==%f===parca__1__%d.mat',x,a), 'x','parca1');
+ save(sprintf('derece==%f===parca__2__%d.mat',x,a), 'x','parca2');
+ 
+  
+  end
