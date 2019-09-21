@@ -1,0 +1,22 @@
+import cv2
+import numpy as np
+
+def resmiklasordenal(dosyaadi):
+resim=cv2.imread("%s"%dosyaadi)  
+return
+
+giris_verisi=np.array([])
+for i in range(30):
+    klasorden_alinmis_resim=0
+    i=i+1
+    string='C:\Users\cagri\Desktop\..\Yeni klasör/%s.jpg'%i
+   klasorden_alinmis_resim=resmi_klasorden_al(string)
+   boyutlandirilmis_resim=cv2.resize(klasorden_alinmis_resim,(224,224))
+
+   print(giris_verisi)
+   giris_verisi=np.append(giris_verisi,boyutlandirilmis_resim)
+   print(i+1)
+    giris_verisi=np.reshape(giris_verisi,(-1,224,224,3))
+    np.save("giris-verimiz",giris_verisi)
+
+   print(giris_verisi.shape)
