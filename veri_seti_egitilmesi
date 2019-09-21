@@ -1,0 +1,41 @@
+import numpy as np
+from keras.models import Sequential
+from keras.layers.convolutional import Convolution2D,MaxPooling2D
+from keras.layers import Activation,Flatten,Dense,Dropout
+from keras.optimizers import *
+from keras.layers.normalization import BatchNormalization
+from keras import *
+from keras.models import Sequential
+from keras.layers import Dense ,Activation,Conv2D,Dropout,MaxPooling2D
+
+
+#veri aldığımız yer aynı klasötden çektik
+giris_verisi=np.load("veriseti.npy")
+
+cikis_verisi=np.array([ [1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1],[0,1]])
+
+split_verisi=giris_verisi[1:4]
+split_verisi=np.append(split_verisi,giris_verisi[24:27])
+split_verisi=split_verisi.reshape(-1,224,224,3)
+split_cikis=np.array([[1,0],[1,0],[1,0],[0,1],[0,1],[0,1]])
+
+model=Sequential()
+model.add(Conv2D(50,11,strides=(4,4),input_shape(224,224,3)))
+model.add((MaxPooling2D((5,5)))
+model.add(Conv2D(50,5))
+model.add(Conv2D(50,3))
+model.add(Conv2D(50,3))
+model.add(Conv2D(50,2))
+model.add(Flatten())
+
+model.add(Dense(4096,activation='relu'))
+model.add(Dropout(0.3))
+
+model.add(Dense(4096,activation='relu'))
+model.add(Dense(2))
+model.add(Activation('softmax'))
+
+model.compile(loss='categorial_crossentropy',optimizer=optimizers.RMSprop(lr=0.00001),metrics=['accuracy'])
+model.summary()
+
+model.fit(giris_verisi,cikis_verisi,batch_size=2,epochs=2,validation_split=(split_verisi,split_cikis))
