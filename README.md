@@ -1,5 +1,5 @@
 Parçacık hareketi ve ağın eğitilmesi
-PIVlab alınan convolüsyon yardımıyla işlenen mat file dosyalarını
-128*128 parçalayıp kaydedilmesi.
-veriseti elde etme ve veriseti eğilmesi
-parçacıkların açısınu bulma
+Matlabda elde edilen görüntülerin
+parçalanarak 128*128 şeklinde veriseti oluşturulup
+Daha sonra bu verisetini eğiterek parçaçıkların hareketinin 
+Derin öğrenme yardımıyla eğitilmesidir.
